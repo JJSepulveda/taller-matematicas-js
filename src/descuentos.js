@@ -8,16 +8,18 @@ const pResult = document.querySelector('#result')
 btn.addEventListener('click', calcularPrecioConDescuento);
 
 // constantes
-const coupons = {
-	'TEXTO_DEL_CUPON20': {
-		valid: true,
-		value: 20,
-	},
-	'TEXTO_DEL_CUPON10': {
-		valid: true,
-		value: 10,
-	},
-}
+const coupons = []
+
+coupons.push({
+	name: 'TEXTO_DEL_CUPON20',
+	valid: true,
+	value: 20
+})
+coupons.push({
+	name: 'TEXTO_DEL_CUPON10',
+	valid: true,
+	value: 10
+})
 
 // funciones 
 function calcularPrecioConDescuento() {
@@ -33,20 +35,14 @@ function calcularPrecioConDescuento() {
 		return;
 	}
 
-	coupon_valid = coupons[coupon];
-	console.log(coupon)
+	coupon_in_array = coupons.find((element) => element.name === coupon)
 
-	if(!coupon_valid || !coupon_valid.valid) {
-		pResult.innerText = `Lo sentimos 😭, el cupon: ${coupon_valid}, no es valido`
+	if(!coupon_in_array || !coupon_in_array.valid) {
+		pResult.innerText = `Lo sentimos 😭, el cupon: ${coupon}, no es valido`
 		return;
 	}
 
-	discount = coupon_valid.value;
-
-	if (discount > 100) {
-		pResult.innerText = `${discount}!! DE DESCUENTO 👀. Creo que escribieste mal.`
-		return;
-	}
+	discount = coupon_in_array.value;
 
 	const newPrice = (price * (100 - discount)) / 100;
 	pResult.innerText = "El precio aplicando el descuetos es:" + newPrice;
