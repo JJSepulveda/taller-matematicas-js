@@ -46,8 +46,6 @@ PlatziMath.promedioReducer = function promedioReducer(lista) {
 	return promedio
 }
 
-console.log(promedioReducer(test_list))
-
 /*
 Mediana
 */
@@ -63,11 +61,11 @@ PlatziMath.calcularMediana = function calcularMediana(arr) {
 	// Variable donde almacenaremos el resultado
 	let mediana;
 	// revisamos si el numero de elemtnos en la lista es par
-	const laListaEsPar = isEven(arr)
+	const laListaEsPar = PlatziMath.isEven(arr)
 	// obtenesmo la mitad del arreglo y lo ajustamos para que coincida con los indices del arreglo
 	const laMitadDelArreglo = Math.round(arr.length / 2) - 1
 	// ordenamos la lista para que no afecte el resultado
-	const listaOrdenada = ordenarLista(arr)
+	const listaOrdenada = PlatziMath.ordenarLista(arr)
 
 	if (laMitadDelArreglo < 0){
 		// 😒 el arreglo esta vacio...
@@ -79,7 +77,7 @@ PlatziMath.calcularMediana = function calcularMediana(arr) {
 			listaOrdenada[laMitadDelArreglo],
 			listaOrdenada[laMitadDelArreglo + 1]
 		]
-		mediana = promedioFor(valores)	
+		mediana = PlatziMath.promedioFor(valores)	
 	}
 	else {
 		mediana = listaOrdenada[laMitadDelArreglo]
@@ -130,7 +128,7 @@ PlatziMath.calcularModa = function calcularModa(lista) {
 		}
 	}
 	// Vamos a ordenar de mayor a menor para obtener el valor que mas se repite
-	listaOrdenada = ordenarListaBidimensional(Object.entries(contadorDeElementos), 1)
+	listaOrdenada = PlatziMath.ordenarListaBidimensional(Object.entries(contadorDeElementos), 1)
 
 	// Como se ordeno de mayor a menor el primer elemento del array es la moda.
 	return listaOrdenada[0];
