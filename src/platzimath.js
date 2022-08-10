@@ -114,3 +114,36 @@ PlatziMath.ordenarLista = function ordenarLista(listaDesordenada) {
 	return lista;
 }
 
+
+/*
+Moda
+*/
+PlatziMath.calcularModa = function calcularModa(lista) {
+	const contadorDeElementos = {}	
+
+	for(elemento of lista) {
+		if(contadorDeElementos[elemento]){
+			contadorDeElementos[elemento] += 1;
+		}
+		else {
+			contadorDeElementos[elemento] = 1;
+		}
+	}
+	// Vamos a ordenar de mayor a menor para obtener el valor que mas se repite
+	listaOrdenada = ordenarListaBidimensional(Object.entries(contadorDeElementos), 1)
+
+	// Como se ordeno de mayor a menor el primer elemento del array es la moda.
+	return listaOrdenada[0];
+}
+
+/**
+* Sort a two-dimentional list
+* @author yeiyeh
+* @param {List[][]} listaDesordenada - two-dimentional list to will sort.
+* @param {Number} indice - colum used to sort the list.
+* @returns {List[][]} lista - the sorted asecending list.
+*/
+PlatziMath.ordenarListaBidimensional = function ordenarListaBidimensional(listaDesordenada, indice) {
+	const lista = listaDesordenada.sort((a, b) => b[indice] - a[indice]);
+	return lista;
+}
