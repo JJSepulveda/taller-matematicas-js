@@ -64,3 +64,55 @@ function porcentajeDeCrecimiento(nombrePersona) {
 
 	return nuevoSalario;
 }
+
+// Análisis empresarial
+/* {
+  Industrias Mokepon: {
+    2018: [salario]
+  }
+  Industrias Mokepon: {
+    2018: [salario, salarios, salrios]
+    2019: 
+    2025: 
+    2026: 
+  },
+  Industrias Mokepon: {},
+  Industrias Mokepon: {},
+  Industrias Mokepon: {},
+} */
+// Primero vamos a reestrcuturar los datos para poder
+// hacer sacar la mediana por empresa
+const empresas = {};
+
+for (persona of salarios) {
+  for (trabajo of persona.trabajos) {
+    if (!empresas[trabajo.empresa]) {
+      empresas[trabajo.empresa] = {};
+    }
+
+    if (!empresas[trabajo.empresa][trabajo.year]) {
+      empresas[trabajo.empresa][trabajo.year] = [];
+    }
+
+    empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
+  }
+}
+
+console.log({empresas});
+
+/**
+ * Calculate the median of one business of a given year
+ * @param {String} nombre - The name of the business
+ * @param {Number} year - The year
+ * @returns {Number} MedianaEmpresa - The median
+ * */
+function medianaEmpresaYear(nombre, year) {
+  if (!empresas[nombre]) {
+    console.warn('La empresa no existe');
+  } else if (!empresas[nombre][year]) {
+    console.warn('La empresa no dio salarios ese año');
+  } else {
+  	const MedianaEmpresa = PlatziMath.calcularMediana(empresas[nombre][year])
+    return MedianaEmpresa;
+  }
+}
