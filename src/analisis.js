@@ -15,7 +15,6 @@ function encontrarPersona(personaEnBusqueda) {
 	return persona;
 }
 
-
 /**
  * Calculate the median of the salary of one person
  * @param {String} nombrePersona - The name of the person
@@ -28,7 +27,7 @@ function medianaDeSalariosPorPersona(nombrePersona) {
 		return elemento.salario;
 	})
 
-	const medianaSalarios = PlatziMath.calcularMediana(salarios);
+	const medianaPorPersona = PlatziMath.calcularMediana(salarios);
 
 	return medianaPorPersona;
 }
@@ -166,4 +165,40 @@ function proyeccionPorEmpresa(nombre) {
 	const nuevoSalario = ultimoSalario + aumento
 
 	console.log(nuevoSalario)
+}
+
+
+// Analiss general
+function medainaGeneral() {
+	const listaMedianaPorPersona = salarios.map(
+		persona => medianaDeSalariosPorPersona(persona.name)
+	)
+	const mediana = PlatziMath.calcularMediana(listaMedianaPorPersona)
+	console.log({
+		mediana
+	})
+	return mediana;
+}
+
+/**
+ * Calculate the 10 percentage of people in the
+ * @param {String} nombre - The name of the business
+ * @param {Number} year - The year
+ * @returns {Number} MedianaEmpresa - The median
+ * */
+function medianaTop10() {
+	const listaMedianas = salarios.map(
+		persona => medianaDeSalariosPorPersona(persona.name)
+	);
+
+	const medianasOrdenadas = PlatziMath.ordenarLista(listaMedianas);
+
+	const cantidad = listaMedianas.length / 10;
+	const limite = listaMedianas.length - cantidad;
+
+	console.log(limite)
+	const top10 = medianasOrdenadas.slice(limite, medianasOrdenadas.length);
+	const medoianaTop10 = PlatziMath.calcularMediana(top10);
+
+	return medoianaTop10;
 }
